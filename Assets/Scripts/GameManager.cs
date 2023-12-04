@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     private LevelGrid levelGrid;
     private Snake snake;
 
-    private ScoreUI scoreUIScript; //Pendiente
+    //private ScoreUI scoreUIScript; //Pendiente
     
     private void Awake()
     {
@@ -37,9 +37,7 @@ public class GameManager : MonoBehaviour
         snake.Setup(levelGrid);
         levelGrid.Setup(snake);
 
-        scoreUIScript = GetComponentInChildren<ScoreUI>();
-        score = 0;
-        AddScore(0);
+        Score.InitializeStaticScore();
     }
 
     private void Update()
@@ -53,17 +51,6 @@ public class GameManager : MonoBehaviour
         {
             PauseGame();
         }
-    }
-
-    public int GetScore()
-    {
-        return score;
-    }
-
-    public void AddScore(int pointsToAdd)
-    {
-        score += pointsToAdd;
-        scoreUIScript.UpdateScoreText(score);
     }
 
     public void SnakeDied()

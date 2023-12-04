@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -8,13 +9,6 @@ public class ScoreUI : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI highScoreText;
-    public void UpdateScoreText(int score)
-    {
-        scoreText.text = score.ToString();
-
-        int highScore = Score.GetHighScore();
-        highScoreText.text = highScore.ToString();
-    }
 
     private void Awake()
     {
@@ -25,5 +19,21 @@ public class ScoreUI : MonoBehaviour
         }
 
         Instance = this;
+    }
+
+    private void Score_OnHighScoreChange(object sender, EventArgs e)
+    {
+        UpdateHighScoreText();
+    }
+
+    public void UpdateHighScoreText()
+    {
+        int highScore = Score.GetHighScore();
+        highScoreText.text = highScore.ToString();
+    }
+
+    public void UpdateScoreText(int score)
+    {
+        scoreText.text = score.ToString();
     }
 }
